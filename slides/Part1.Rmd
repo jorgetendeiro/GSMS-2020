@@ -73,8 +73,7 @@ Data here: [https://dasl.datadescription.com/datafile/bodyfat/](https://dasl.dat
 
 \footnotesize
 ```{r, echo = TRUE, results = 'hide'}
-url.data <- "https://dasl.datadescription.com/download/
-data/3079"
+url.data <- "https://dasl.datadescription.com/download/data/3079"
 PBF.data <- read.csv(url(url.data), header = TRUE, sep = "\t")
 PBF      <- ifelse(PBF.data$Pct.BF > 25, 1, 0)
 prop.table(table(PBF))
@@ -83,11 +82,123 @@ prop.table(table(PBF))
 
 # Bayes rule -- Example
 ```{r echo = FALSE, fig.height = 6}
-bp <- barplot(prop.table(table(PBF)), ylim = c(0, .82), 
+bp <- barplot(prop.table(table(PBF)), ylim = c(0, .82), #axis.lty=1, 
         main="", xlab="", ylab = "Proportion body fat", names.arg = c("PBF < 25%", "PBF > 25%"), 
         las = 1, col = "#4b0306")
 text(bp, prop.table(table(PBF)) + .03, labels = prop.table(table(PBF)), cex = 1.2)
 ```
+
+# Bayes rule -- Example (N = 1)
+
+```{r echo = FALSE, message = FALSE, out.width = '90%', fig.align = "center"}
+par(mar = c(4, 6.5, 2.5, 5))
+layout(matrix(1:3, ncol = 1))
+
+a0      <- 1
+b0      <- 1
+PBF.use <- PBF[1]
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+
+# Prior:
+curve(dbeta(x, a0, b0), ylim = c(0, 1.1), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = " red", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Prior", 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = c(0, .5, 1), las = 1, cex.axis = 1.2)
+
+# Likelihood:
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = paste0("Likelihood: data = 0"), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+
+# Posterior:
+curve(dbeta(x, a0 + obese, b0 + (N - obese)), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = " blue", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = expression(bold("Posterior" %prop% "Prior x Likelihood")), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+```
+
+# Bayes rule -- Example (N = 2)
+
+```{r echo = FALSE, message = FALSE, out.width = '90%', fig.align = "center"}
+par(mar = c(4, 6.5, 2.5, 5))
+layout(matrix(1:3, ncol = 1))
+
+a1       <- a0 + obese
+b1       <- b0 + (N - obese)
+PBF.use  <- PBF[2]
+obese    <- sum(PBF.use == 1)
+N        <- length(PBF.use)
+
+# Prior:
+curve(dbeta(x, a1, b1), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = " red", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Prior", 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+
+# Likelihood:
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = paste0("Likelihood: data = 0"), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+
+# Posterior:
+curve(dbeta(x, a1 + obese, b1 + (N - obese)), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = " blue", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = expression(bold("Posterior" %prop% "Prior x Likelihood")), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:3, las = 1, cex.axis = 1.2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+```
+
+# Bayes rule -- Example (N = 3)
+
+```{r echo = FALSE, message = FALSE, out.width = '90%', fig.align = "center"}
+par(mar = c(4, 6.5, 2.5, 5))
+layout(matrix(1:3, ncol = 1))
+
+a2       <- a1 + obese
+b2       <- b1 + (N - obese)
+PBF.use  <- PBF[3]
+obese    <- sum(PBF.use == 1)
+N        <- length(PBF.use)
+
+# Prior:
+curve(dbeta(x, a2, b2), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = " red", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Prior", 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:3, las = 1, cex.axis = 1.2)
+
+# Likelihood:
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = paste0("Likelihood: data = 1"), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+
+# Posterior:
+curve(dbeta(x, a2 + obese, b2 + (N - obese)), yaxt = "n", ylim = c(0, 2), 
+      n = 10001, bty = "n", las = 1, col = " blue", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = expression(bold("Posterior" %prop% "Prior x Likelihood")), 
+      cex.main = 1.5, cex.axis = 1.2, lwd = 2)
+axis(2, at = 0:2, las = 1, cex.axis = 1.2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+```
+
+
+
+
+
+
+
 
 
 
