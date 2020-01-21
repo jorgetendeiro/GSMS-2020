@@ -16,12 +16,12 @@ All code is freely available from
 [Github](https://github.com/jorgetendeiro/GSMS-2020). The slides are
 available here:
 
-  - [Slides Part 1](slides/Part1.pdf)
-  - [Slides Part 2](slides/Part2.pdf)
+  - [Part 1](slides/Part1.pdf)
+  - [Part 2](slides/Part2.pdf)
 
 All analyses are fully reproducible. I will use both
-[JASP](https://jasp-stats.org) and [R](https://www.r-project.org) /
-[RStudio](https://rstudio.com) as the graphical user interface. The
+[JASP](https://jasp-stats.org) and [R](https://www.r-project.org) (with
+[RStudio](https://rstudio.com) as the graphical user interface). The
 following R packages will be used and should be installed in case you
 want to mimic the analyses shown on the slides:
 
