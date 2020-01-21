@@ -1,0 +1,328 @@
+---
+title: "Introduction to Bayesian statistics^[The template from these slides is inspired in that from [Mark Andrews](https://github.com/mark-andrews/sips2019)]"
+subtitle: "Part 1 --- Concepts"
+author: |
+  | Jorge N. Tendeiro
+  |
+  | Department of Psychometrics and Statistics
+  | Faculty of Behavioral and Social Sciences
+  | University of Groningen
+  |   
+  | \faEnvelopeO\  ```j.n.tendeiro@rug.nl```
+  | \faGithub\ ```https://github.com/jorgetendeiro/GSMS-2020```
+fontsize: 10pt
+output:
+ beamer_presentation:
+ # keep_tex: true
+  fonttheme: "serif"
+  includes:
+   in_header: include/preamble.tex
+bibliography: include/references.bib
+csl: 'include/apa-old-doi-prefix.csl'
+nocite: |
+  @forder2019hearing
+---
+
+```{r, include=FALSE}
+library(ggplot2)
+library(pander)
+panderOptions('round', 3)
+panderOptions('keep.trailing.zeros', TRUE)
+```
+
+# Bayes rule
+
+- $\mathcal{D}=$ data
+- $\theta=$ unknown parameter
+
+$$
+\fbox{$p(\theta|\mathcal{D}) = \frac{p(\theta)p(\mathcal{D}|\theta)}{p(\mathcal{D})}$}
+$$
+
+In words,
+
+$$
+\fbox{$\text{posterior} = \frac{\text{prior} \times \text{likelihood}}{\text{evidence}}$}
+$$
+
+The *evidence* does not depend on $\theta$; let's hide it: 
+
+$$
+\fbox{$\text{posterior} \propto \text{prior} \times \text{likelihood}$}
+$$
+The symbol $\propto$ means "proportional to". 
+
+# Bayes rule
+
+$$
+\fbox{$\text{posterior} \propto \text{prior} \times \text{likelihood}$}
+$$
+
+
+- *Prior*: Belief about the `true' value of $\theta$, *before looking at the data*.
+- *Likelihood*: The statistical model, linking $\theta$ to data.
+- *Posterior*: Updated knowledge about $\theta$, in light of the observed data.
+
+# Bayes rule -- Example
+Data here: [https://dasl.datadescription.com/datafile/bodyfat/](https://dasl.datadescription.com/datafile/bodyfat/){target="_blank"}. 
+
+- Various measurements of 250 men. 
+- Keep it simple: Let's dichotomize the percentage of body fat (0 = PBF lower than 25%; 1 = PBF larger than 25%). 
+- *Goal*: Infer infer the proportion of obese men in the population.
+\vfill 
+
+\footnotesize
+```{r, echo = TRUE, results = 'hide'}
+url.data <- "https://dasl.datadescription.com/download/
+data/3079"
+PBF.data <- read.csv(url(url.data), header = TRUE, sep = "\t")
+PBF      <- ifelse(PBF.data$Pct.BF > 25, 1, 0)
+prop.table(table(PBF))
+```
+\normalsize
+
+# Bayes rule -- Example
+```{r echo = FALSE, fig.height = 6}
+bp <- barplot(prop.table(table(PBF)), ylim = c(0, .82), 
+        main="", xlab="", ylab = "Proportion body fat", names.arg = c("PBF < 25%", "PBF > 25%"), 
+        las = 1, col = "#4b0306")
+text(bp, prop.table(table(PBF)) + .03, labels = prop.table(table(PBF)), cex = 1.2)
+```
+
+
+
+
+
+# The rest
+
+Therefore, the posterior distribution is basically a (rational, logically correct) means of merging together both our prior knowledged about some phenomenon with the information about the phenomenon that our data has to offer.
+
+## A small example
+
+Let's make things concrete. I downloaded data from [https://dasl.datadescription.com/datafile/bodyfat/](https://dasl.datadescription.com/datafile/bodyfat/){target="_blank"}, containing various measurements of 250 men. I focus on variable 'Pct.BF' (percentage of body fat) and dichotomize it (0 = PBF lower than 25%; 1 = PBF larger than 25%). I want to infer the proportion of obese men in the population.
+
+```{r message=FALSE}
+PBF.data <- read.csv(url("https://dasl.datadescription.com/download/data/3079"), 
+                     header = TRUE, sep = "\t")
+PBF      <- ifelse(PBF.data$Pct.BF > 25, 1, 0)
+head(PBF)
+length(PBF)
+prop.table(table(PBF))
+```
+
+Let's start by focusing on the data from the first 20 subjects in the sample. Suppose, rather unrealistically, that a priori all proportions of obese men in the population are equally likely. Using the binomial model to account for the number of obese men in the sample, the three elements of Bayesian statistics (prior, likelihood, posterior) can be visualized as follows:
+
+```{r echo=FALSE, fig.height = 6}
+PBF.use <- PBF[1:20]
+a     <- 1
+b     <- 1
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+legend("topright", 
+       legend = c("Prior", "Likelihood", "Posterior"), 
+       col = c("red", "ForestGreen", "blue"), 
+       lwd = 2, bty = "n", seg.len = 5)
+text(x = .8, y = .7*ymax, paste0("median = ", round(qbeta(.5, a + obese, b + (N - obese)), 2)))
+LB <- round(qbeta(.025, a + obese, b + (N - obese)), 2)
+UB <- round(qbeta(.975, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .6*ymax, paste0("95% cred int = (", LB, ", ", UB, ")"))
+polygon(x = c(seq(LB, UB, length.out = 100), seq(UB, LB, length.out = 100)), 
+        y = c(dbeta(c(seq(LB, UB, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+```
+
+Observe that:
+
+- The red line is the prior and it expresses the fact that all proportions are, a priori, equally likely.
+
+- The blue line is the posterior distribution. It reflects our updated knowledge about the population proportion, conditional on our model and data.
+
+- The likelihood (rescaled to unit area) coincides with the posterior distribution (in this case of a uniform prior), and that is why it appears to be missing.
+
+
+Let's improve the prior distribution. Suppose we expected, a priori, that the proportion of obese men in the population would be [about 40%](https://en.wikipedia.org/wiki/Obesity_in_the_United_States){target="_blank"}. We can pick a prior which is somehow peaked around .4 and redo the computations:
+
+```{r echo=FALSE, fig.height = 6}
+PBF.use <- PBF[1:20]
+a     <- 40
+b     <- 60
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+legend("topright", 
+       legend = c("Prior", "Likelihood", "Posterior"), 
+       col = c("red", "ForestGreen", "blue"), 
+       lwd = 2, bty = "n", seg.len = 5)
+text(x = .8, y = .7*ymax, paste0("median = ", round(qbeta(.5, a + obese, b + (N - obese)), 2)))
+LB <- round(qbeta(.025, a + obese, b + (N - obese)), 2)
+UB <- round(qbeta(.975, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .6*ymax, paste0("95% cred int = (", LB, ", ", UB, ")"))
+polygon(x = c(seq(LB, UB, length.out = 100), seq(UB, LB, length.out = 100)), 
+        y = c(dbeta(c(seq(LB, UB, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+```
+
+The posterior distribution changed, *as it should*: Changes in the prior and/or likelihood will lead to changes in the posterior. Observe how the posterior distribution is a balance between the information in the data (the likelihood) and the information a prior (the prior). Bayesian statistics is all about rendering a compromise between these two sources.
+
+Above I displayed two estimated model, rendering two rather different versions of updated knowledge about the proportion of obesity. The data are the same, yet the conclusions differ... This reflects uncertainty related to the model. What happens if we have more data? Let's reproduce the two previous plots, this time using the scores of all 250 men in the sample:
+
+```{r echo=FALSE, message=FALSE, fig.height = 6}
+par(mar = c(4, 6.5, 2.5, 1))
+layout(matrix(c(1, 2), ncol = 1))
+
+PBF.use <- PBF
+a     <- 1
+b     <- 1
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+legend("topright", 
+       legend = c("Prior", "Likelihood", "Posterior"), 
+       col = c("red", "ForestGreen", "blue"), 
+       lwd = 2, bty = "n", seg.len = 5)
+text(x = .8, y = .4*ymax, paste0("median = ", round(qbeta(.5, a + obese, b + (N - obese)), 2)))
+LB <- round(qbeta(.025, a + obese, b + (N - obese)), 2)
+UB <- round(qbeta(.975, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .2*ymax, paste0("95% cred int = (", LB, ", ", UB, ")"))
+polygon(x = c(seq(LB, UB, length.out = 100), seq(UB, LB, length.out = 100)), 
+        y = c(dbeta(c(seq(LB, UB, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+
+PBF.use <- PBF
+a     <- 40
+b     <- 60
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+legend("topright", 
+       legend = c("Prior", "Likelihood", "Posterior"), 
+       col = c("red", "ForestGreen", "blue"), 
+       lwd = 2, bty = "n", seg.len = 5)
+text(x = .8, y = .4*ymax, paste0("median = ", round(qbeta(.5, a + obese, b + (N - obese)), 2)))
+LB <- round(qbeta(.025, a + obese, b + (N - obese)), 2)
+UB <- round(qbeta(.975, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .2*ymax, paste0("95% cred int = (", LB, ", ", UB, ")"))
+polygon(x = c(seq(LB, UB, length.out = 100), seq(UB, LB, length.out = 100)), 
+        y = c(dbeta(c(seq(LB, UB, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+```
+
+As can be seen, even though the priors differ a lot, the posteriors now look more similar. The reason is that there is typically more information in a sample of size 250 than in a sample of size 20. As the information provided by the data accummulates, the updated knowledge tends to depend less and less on the prior. In this way, it is possible that two persons with very dissimilar starting points (=priors) end up with a similar updated knowledge (=posteriors) about the phenomenon at hand.
+
+Why are posterior distributions useful? In essence, they can provide *direct* answers to research questions. For example, based on the posterior plotted on the bottom panel above:
+
+- <span style="color:green">What is the posterior probability that the population proportion of obese men is larger than 30%?</span>
+
+```{r echo=FALSE, fig.height = 6}
+PBF.use <- PBF
+a     <- 40
+b     <- 60
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+
+p.Up30 <- round(1 - pbeta(.30, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .6*ymax, paste0("p = ", p.Up30))
+polygon(x = c(seq(.3, 1, length.out = 100), seq(1, .3, length.out = 100)), 
+        y = c(dbeta(c(seq(.3, 1, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+```
+
+- <span style="color:green">What is the posterior probability that the population proportion of obese men is between 25% and 35%?</span>
+
+```{r echo=FALSE, fig.height = 6}
+PBF.use <- PBF
+a     <- 40
+b     <- 60
+obese <- sum(PBF.use == 1)
+N     <- length(PBF.use)
+ymax <- max(dbinom(obese, N, obese/N) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, 
+            dbeta(seq(0, 1, .001), a + obese, b + (N - obese)), 
+            max(dbeta(seq(0, 1, .001), a, b)))
+
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, ylim = c(0, ceiling(ymax)), 
+      n = 10001, bty = "n", las = 1, col = "ForestGreen", yaxt = "n", ylab = "", yaxs = "i", 
+      xlab = paste0("Proportion obesity (for N = ", N, ")"))
+curve(dbeta(x, a, b),
+      add = TRUE, n = 10001, col = " red")
+curve(dbeta(x, a + obese, b + (N - obese)), 
+      add = TRUE, n = 10001, col = "blue", lwd = 2)
+
+p.25to35 <- round(pbeta(.35, a + obese, b + (N - obese)) - pbeta(.25, a + obese, b + (N - obese)), 2)
+text(x = .8, y = .6*ymax, paste0("p = ", p.25to35))
+polygon(x = c(seq(.25, .35, length.out = 100), seq(.35, .25, length.out = 100)), 
+        y = c(dbeta(c(seq(.25, .35, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(0, 0, 1, .2), border = NA)
+```
+
+## Summary
+
+Bayesian statistics allows you to rationally update your knowledge about a phenomenon. All you need is three ingredients:
+
+- a statistical model;
+- a prior belief;
+- data.
+
+Any person with the same set of 3 ingredients will update his/her knowledge in the same way (that is what I mean by *rational* update). "The" unique way of updating our knowledge is given by the Bayes rule. This rule, by the way, is universal and accepted by frequentists and Bayesians alike (it is mathematically based on axioms). The Bayes rule is a mathematical necessity. Not accepting the Bayes rule is not accepting the basic axioms of probability.
+
+One of the advantages of Bayesian statistics is that it allows answering questions *directly*. This is in contrast with the questions that can be answered by means of frequentist statistics, for which uncertainty pertains to repeated sampling from the population ('If we sample over and over from the population, what can be said about...?').
+
+
+
+
+
+
+
+
+# References
