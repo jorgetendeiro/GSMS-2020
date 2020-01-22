@@ -1,5 +1,6 @@
 ---
-title: "Introduction to Bayesian statistics^[The template from these slides is inspired in that from [Mark Andrews](https://github.com/mark-andrews/sips2019)]"
+# The template from these slides is inspired in that from [Mark Andrews](https://github.com/mark-andrews/sips2019)
+title: "Introduction to Bayesian statistics"
 subtitle: "Part 1 --- Concepts"
 author: |
   | Jorge N. Tendeiro
@@ -22,6 +23,8 @@ csl: 'include/apa-old-doi-prefix.csl'
 nocite: |
   @forder2019hearing
 ---
+
+
 
 ```{r, include=FALSE}
 library(ggplot2)
