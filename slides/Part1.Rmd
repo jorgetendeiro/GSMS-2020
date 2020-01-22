@@ -89,83 +89,8 @@ text(bp, prop.table(table(PBF)) + .03, labels = prop.table(table(PBF)), cex = 1.
 ```
 
 # Scheme
-
-
-\begingroup
-\centering
-
-
-
-
-\tikzset{every picture/.style={line width=0.75pt}}
-
-\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
-%uncomment if require: \path (0,659); %set diagram left start at 0, and has height of 659
-
-%Flowchart: Process [id:dp2562082854390255] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (224.5,175) -- (438.5,175) -- (438.5,245) -- (224.5,245) -- cycle ;
-%Down Arrow [id:dp43240459602589043] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (337,151) -- (342.88,151) -- (342.88,127) -- (354.63,127) -- (354.63,151) -- (360.5,151) -- (348.75,167) -- cycle ;
-%Down Arrow [id:dp47618277930030173] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (219,276) -- (224.88,276) -- (224.88,252) -- (236.63,252) -- (236.63,276) -- (242.5,276) -- (230.75,292) -- cycle ;
-%Down Arrow [id:dp629859547733949] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (421,276) -- (426.88,276) -- (426.88,252) -- (438.63,252) -- (438.63,276) -- (444.5,276) -- (432.75,292) -- cycle ;
-%Down Arrow [id:dp3407327261554225] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (269,276) -- (274.88,276) -- (274.88,252) -- (286.63,252) -- (286.63,276) -- (292.5,276) -- (280.75,292) -- cycle ;
-%Down Arrow [id:dp0052988937645224166] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (373,276) -- (378.88,276) -- (378.88,252) -- (390.63,252) -- (390.63,276) -- (396.5,276) -- (384.75,292) -- cycle ;
-%Down Arrow [id:dp1885656742184907] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (322,276) -- (327.88,276) -- (327.88,252) -- (339.63,252) -- (339.63,276) -- (345.5,276) -- (333.75,292) -- cycle ;
-%Straight Lines [id:da993258268155228] 
-\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (268,144) -- (224.5,175) ;
-
-
-%Straight Lines [id:da4631623736780517] 
-\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (482,144) -- (438.5,175) ;
-
-
-%Straight Lines [id:da9178054629853556] 
-\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (482,214) -- (438.5,245) ;
-
-
-%Straight Lines [id:da7442253996213093] 
-\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (482,144) -- (268,144) ;
-
-
-%Straight Lines [id:da4484651286990091] 
-\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (482,144) -- (482,214) ;
-
-
-%Shape: Rectangle [id:dp5518599505408321] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (213,296) -- (249,296) -- (249,443) -- (213,443) -- cycle ;
-%Shape: Rectangle [id:dp17454659565404018] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (414,297) -- (450,297) -- (450,444) -- (414,444) -- cycle ;
-%Shape: Rectangle [id:dp5897067814553374] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (367,297) -- (403,297) -- (403,444) -- (367,444) -- cycle ;
-%Shape: Rectangle [id:dp3912560071434583] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (315,297) -- (351,297) -- (351,444) -- (315,444) -- cycle ;
-%Shape: Rectangle [id:dp35587008695261213] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (263,296) -- (299,296) -- (299,443) -- (263,443) -- cycle ;
-
-% Text Node
-\draw (349,113) node  [font=\Large]  {$\theta $};
-% Text Node
-\draw (330.5,210) node   [align=left] {\textit{statistical model}};
-% Text Node
-\draw (231,360) node   [align=left] {\textit{data}};
-% Text Node
-\draw (432,361) node   [align=left] {\textit{data}};
-% Text Node
-\draw (385,361) node   [align=left] {\textit{data}};
-% Text Node
-\draw (332,361) node   [align=left] {\textit{data}};
-% Text Node
-\draw (281,360) node   [align=left] {\textit{data}};
-
-
-\end{tikzpicture}
-
-\endgroup
+```{r,child = 'include/prior_predictive_distribution.Rmd'}
+```
 
 # Bayes rule -- Example (N = 1)
 

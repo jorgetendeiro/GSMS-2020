@@ -1,0 +1,79 @@
+<!-- From mathcha. -->
+
+\begingroup
+\centering
+
+
+
+
+\tikzset{every picture/.style={line width=0.75pt}} 
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,659); %set diagram left start at 0, and has height of 659
+
+%Flowchart: Process [id:dp2562082854390255] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (324.5,239) -- (538.5,239) -- (538.5,309) -- (324.5,309) -- cycle ;
+%Down Arrow [id:dp43240459602589043] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (437,201) -- (442.88,201) -- (442.88,177) -- (454.63,177) -- (454.63,201) -- (460.5,201) -- (448.75,217) -- cycle ;
+%Down Arrow [id:dp47618277930030173] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (319,340) -- (324.88,340) -- (324.88,316) -- (336.63,316) -- (336.63,340) -- (342.5,340) -- (330.75,356) -- cycle ;
+%Down Arrow [id:dp629859547733949] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (521,340) -- (526.88,340) -- (526.88,316) -- (538.63,316) -- (538.63,340) -- (544.5,340) -- (532.75,356) -- cycle ;
+%Down Arrow [id:dp3407327261554225] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (369,340) -- (374.88,340) -- (374.88,316) -- (386.63,316) -- (386.63,340) -- (392.5,340) -- (380.75,356) -- cycle ;
+%Down Arrow [id:dp0052988937645224166] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (473,340) -- (478.88,340) -- (478.88,316) -- (490.63,316) -- (490.63,340) -- (496.5,340) -- (484.75,356) -- cycle ;
+%Down Arrow [id:dp1885656742184907] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (422,340) -- (427.88,340) -- (427.88,316) -- (439.63,316) -- (439.63,340) -- (445.5,340) -- (433.75,356) -- cycle ;
+%Straight Lines [id:da993258268155228] 
+\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (368,208) -- (324.5,239) ;
+
+
+%Straight Lines [id:da4631623736780517] 
+\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (582,208) -- (538.5,239) ;
+
+
+%Straight Lines [id:da9178054629853556] 
+\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (582,278) -- (538.5,309) ;
+
+
+%Straight Lines [id:da7442253996213093] 
+\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (582,208) -- (368,208) ;
+
+
+%Straight Lines [id:da4484651286990091] 
+\draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (582,208) -- (582,278) ;
+
+
+%Shape: Rectangle [id:dp5518599505408321] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (313,360) -- (349,360) -- (349,420) -- (313,420) -- cycle ;
+%Shape: Rectangle [id:dp7248366809971241] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (363,360) -- (399,360) -- (399,420) -- (363,420) -- cycle ;
+%Shape: Rectangle [id:dp4931493245792642] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (416,360) -- (452,360) -- (452,420) -- (416,420) -- cycle ;
+%Shape: Rectangle [id:dp8295226899742401] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (467,360) -- (503,360) -- (503,420) -- (467,420) -- cycle ;
+%Shape: Rectangle [id:dp2340609056214109] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (516,360) -- (552,360) -- (552,420) -- (516,420) -- cycle ;
+%Shape: Parallelogram [id:dp7610631512120296] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (429,220) -- (480,220) -- (471,227) -- (420,227) -- cycle ;
+
+% Text Node
+\draw (449,163) node  [font=\Large]  {$\theta $};
+% Text Node
+\draw (430.5,274) node   [align=left] {\textit{statistical model}};
+% Text Node
+\draw (331,387) node   [align=left] {\textit{data}};
+% Text Node
+\draw (381,387) node   [align=left] {\textit{data}};
+% Text Node
+\draw (434,387) node   [align=left] {\textit{data}};
+% Text Node
+\draw (485,387) node   [align=left] {\textit{data}};
+% Text Node
+\draw (534,387) node   [align=left] {\textit{data}};
+
+
+\end{tikzpicture}
+
+\endgroup
