@@ -4,6 +4,13 @@
 \centering
 
 
+\begin{figure}
+\resizebox{\linewidth}{!}{
+
+
+
+
+
 
 
 \tikzset{every picture/.style={line width=0.75pt}} 
@@ -13,8 +20,6 @@
 
 %Flowchart: Process [id:dp2562082854390255] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (324.5,239) -- (538.5,239) -- (538.5,309) -- (324.5,309) -- cycle ;
-%Down Arrow [id:dp43240459602589043] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (437,201) -- (442.88,201) -- (442.88,177) -- (454.63,177) -- (454.63,201) -- (460.5,201) -- (448.75,217) -- cycle ;
 %Down Arrow [id:dp47618277930030173] 
 \draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (319,340) -- (324.88,340) -- (324.88,316) -- (336.63,316) -- (336.63,340) -- (342.5,340) -- (330.75,356) -- cycle ;
 %Down Arrow [id:dp629859547733949] 
@@ -24,7 +29,7 @@
 %Down Arrow [id:dp0052988937645224166] 
 \draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (473,340) -- (478.88,340) -- (478.88,316) -- (490.63,316) -- (490.63,340) -- (496.5,340) -- (484.75,356) -- cycle ;
 %Down Arrow [id:dp1885656742184907] 
-\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (422,340) -- (427.88,340) -- (427.88,316) -- (439.63,316) -- (439.63,340) -- (445.5,340) -- (433.75,356) -- cycle ;
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (421,340) -- (426.88,340) -- (426.88,316) -- (438.63,316) -- (438.63,340) -- (444.5,340) -- (432.75,356) -- cycle ;
 %Straight Lines [id:da993258268155228] 
 \draw [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]    (368,208) -- (324.5,239) ;
 
@@ -48,7 +53,7 @@
 %Shape: Rectangle [id:dp5518599505408321] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (313,360) -- (349,360) -- (349,420) -- (313,420) -- cycle ;
 %Shape: Rectangle [id:dp7248366809971241] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (363,360) -- (399,360) -- (399,420) -- (363,420) -- cycle ;
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=5.25]  (363,360) -- (399,360) -- (399,420) -- (363,420) -- cycle ;
 %Shape: Rectangle [id:dp4931493245792642] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (416,360) -- (452,360) -- (452,420) -- (416,420) -- cycle ;
 %Shape: Rectangle [id:dp8295226899742401] 
@@ -56,10 +61,55 @@
 %Shape: Rectangle [id:dp2340609056214109] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (516,360) -- (552,360) -- (552,420) -- (516,420) -- cycle ;
 %Shape: Parallelogram [id:dp7610631512120296] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (429,220) -- (480,220) -- (471,227) -- (420,227) -- cycle ;
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (360.7,219.57) -- (553.54,219.57) -- (546.27,224.9) -- (353.43,224.9) -- cycle ;
+%Bend Arrow [id:dp9295517498023407] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (240.43,66.34) -- (453.89,66.93) .. controls (465.95,66.96) and (475.7,76.77) .. (475.67,88.84) -- (475.61,108.65) -- (478.38,108.66) -- (472.15,117.37) -- (465.97,108.62) -- (468.73,108.63) -- (468.79,88.82) .. controls (468.81,80.55) and (462.13,73.83) .. (453.87,73.81) -- (240.41,73.22) -- cycle ;
+%Down Arrow [id:dp990279229217988] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (357,183) -- (362.88,183) -- (362.88,159) -- (374.63,159) -- (374.63,183) -- (380.5,183) -- (368.75,199) -- cycle ;
+%Down Arrow [id:dp15391649380853023] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (559,183) -- (564.88,183) -- (564.88,159) -- (576.63,159) -- (576.63,183) -- (582.5,183) -- (570.75,199) -- cycle ;
+%Down Arrow [id:dp3319111532140271] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (407,183) -- (412.88,183) -- (412.88,159) -- (424.63,159) -- (424.63,183) -- (430.5,183) -- (418.75,199) -- cycle ;
+%Down Arrow [id:dp7371787797468776] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (511,183) -- (516.88,183) -- (516.88,159) -- (528.63,159) -- (528.63,183) -- (534.5,183) -- (522.75,199) -- cycle ;
+%Down Arrow [id:dp8707449690679061] 
+\draw  [fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (459,183) -- (464.88,183) -- (464.88,159) -- (476.63,159) -- (476.63,183) -- (482.5,183) -- (470.75,199) -- cycle ;
+%Straight Lines [id:da5736752457383967] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (306.5,351) -- (355.5,430) ;
+
+
+%Straight Lines [id:da5067573653349091] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (353.5,353) -- (306.5,431) ;
+
+
+
+%Straight Lines [id:da5691434378431401] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (357.5,352) -- (406.5,431) ;
+
+
+%Straight Lines [id:da22143186136909399] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (404.5,354) -- (357.5,432) ;
+
+
+
+%Straight Lines [id:da8469457651313519] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (460.5,349) -- (509.5,428) ;
+
+
+%Straight Lines [id:da008540522529341343] 
+\draw [color={rgb, 255:red, 255; green, 0; blue, 0 }  ,draw opacity=1 ][line width=5.25]    (507.5,351) -- (460.5,429) ;
+
+
+
+%Bend Arrow [id:dp18625692567971286] 
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][fill={rgb, 255:red, 75; green, 3; blue, 6 }  ,fill opacity=1 ] (557.27,443.59) -- (656.77,443.96) .. controls (661.19,443.97) and (664.78,440.41) .. (664.79,435.99) -- (664.82,428.5) -- (668.56,428.51) -- (662.03,425.24) -- (655.49,428.47) -- (659.22,428.48) -- (659.19,435.97) .. controls (659.19,437.29) and (658.11,438.36) .. (656.79,438.36) -- (557.29,437.99) -- cycle ;
+%Image [id:dp34602494301508147] 
+\draw (234.25,118.83) node  {\includegraphics[width=177.38pt,height=118.25pt]{include/figures/JrAFoq5fae-prior.png}};
+%Image [id:dp5534818714760965] 
+\draw (681,352.33) node  {\includegraphics[width=177pt,height=118pt]{include/figures/3GzOCooNPt-posterior.png}};
 
 % Text Node
-\draw (449,163) node  [font=\Large]  {$\theta $};
+\draw (368,137.67) node  [font=\Large]  {$\theta _{1}$};
 % Text Node
 \draw (430.5,274) node   [align=left] {\textit{statistical model}};
 % Text Node
@@ -67,13 +117,38 @@
 % Text Node
 \draw (381,387) node   [align=left] {\textit{data}};
 % Text Node
-\draw (434,387) node   [align=left] {\textit{data}};
+\draw (434,388) node   [align=left] {$\displaystyle \approx $\\\textit{obs.}\\\textit{data}};
 % Text Node
 \draw (485,387) node   [align=left] {\textit{data}};
 % Text Node
-\draw (534,387) node   [align=left] {\textit{data}};
+\draw (569,137.67) node  [font=\Large]  {$\theta _{5}$};
+% Text Node
+\draw (521,137.67) node  [font=\Large]  {$\theta _{4}$};
+% Text Node
+\draw (474,137.67) node  [font=\Large]  {$\theta _{3}$};
+% Text Node
+\draw (420,137.67) node  [font=\Large]  {$\theta _{2}$};
+% Text Node
+\draw (530,439.67) node  [font=\Large]  {$\theta _{5}$};
+% Text Node
+\draw (435,439.67) node  [font=\Large]  {$\theta _{3}$};
+% Text Node
+\draw (535,388) node   [align=left] {$\displaystyle \approx $\\\textit{obs.}\\\textit{data}};
+% Text Node
+\draw (348,52) node   [align=left] {\textit{(many random draws)}};
+% Text Node
+\draw (183,123) node   [align=left] {\textit{\textbf{{\Large Prior}}}};
+% Text Node
+\draw (717,349) node   [align=left] {\textbf{\textit{{\Large Posterior}}}};
+% Text Node
+\draw (256,199.67) node  [font=\Large]  {$\theta $};
+% Text Node
+\draw (701,434.67) node  [font=\Large]  {$\theta $};
 
 
 \end{tikzpicture}
+
+}
+\end{figure}
 
 \endgroup
