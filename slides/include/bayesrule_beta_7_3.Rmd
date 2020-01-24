@@ -1,0 +1,47 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/bayesrule_beta_7_3.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(4, 6.5, 2.5, 5), bg = NA)
+layout(matrix(1:3, ncol = 1))
+
+a       <- 7
+b       <- 3
+PBF.use <- PBF[1:10]
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+
+# Prior:
+curve(dbeta(x, a, b), ylim = c(0, 3.75), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Prior", lwd = 2)
+polygon(x = c(seq(0, 1, length.out = 100), seq(1, 0, length.out = 100)), 
+        y = c(dbeta(c(seq(0, 1, length.out = 100)), a, b), rep(0, 100)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+axis(2, at = c(0, 3.75), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 3, 1), lwd = 0, lwd.ticks = 1, las = 1)
+
+# Likelihood:
+curve(dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value, yaxt = "n", 
+             n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+             xlab = "", ylab = "", main = paste0("Likelihood: 2 in 10"), 
+             lwd = 2, ylim = c(0, 3.75))
+polygon(x = c(seq(0, 1, length.out = 100), seq(1, 0, length.out = 100)), 
+        y = c(sapply(seq(0, 1, length.out = 100), function(x) dbinom(obese, N, x) / integrate(function(x) dbinom(obese, N, x), 0, 1)$value), rep(0, 100)),
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+axis(2, at = c(0, 3.75), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 3, 1), lwd = 0, lwd.ticks = 1, las = 1)
+
+# Posterior:
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 3.75), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = expression(bold("Posterior" %prop% "Prior x Likelihood")), 
+      lwd = 2)
+polygon(x = c(seq(0, 1, length.out = 100), seq(1, 0, length.out = 100)), 
+        y = c(dbeta(c(seq(0, 1, length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+axis(2, at = c(0, 3.75), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 3, 1), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+dev.off()
+```

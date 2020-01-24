@@ -1,0 +1,53 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/bayesrule_discrete_unif.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(4, 6.5, 2.5, 5), bg = NA, xpd = TRUE)
+layout(matrix(1:3, ncol = 1))
+
+PBF.use <- PBF[1:10]
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+my.th   <- seq(0, 1, .1)
+
+# Prior:
+plot(my.th, rep(1 / length(my.th), length(my.th)), pch = 21, cex = 1.5, lwd = 2, 
+     col = "#4b0306", bg = rgb(75/256, 3/256, 6/256, .2), 
+     ylim = c(0, .3), yaxt = "n", 
+     bty = "n", las = 1, yaxs = "i", # yaxs = "i", 
+     xlab = "", ylab = "", main = "Prior")
+segments(x0 = my.th, y0 = rep(0, length(my.th)), 
+         x1 = my.th, y1 = rep(1 / length(my.th), length(my.th)), 
+         col = "#4b0306", lwd = 2)
+axis(2, at = c(0, .35), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, .3, .1), lwd = 0, lwd.ticks = 1, las = 1)
+
+# Likelihood:
+my.lik <- sapply(my.th, function(th) choose(N, obese) * (th^obese) * ((1-th)^(N-obese)))
+plot(my.th, my.lik, pch = 21, cex = 1.5, lwd = 2, 
+     col = "#4b0306", bg = rgb(75/256, 3/256, 6/256, .2), 
+     ylim = c(0, .35), yaxt = "n", 
+     bty = "n", las = 1, yaxs = "i", # yaxs = "i", 
+     xlab = "", ylab = "", main = "Likelihood: 2 in 10")
+segments(x0 = my.th, y0 = rep(0, length(my.th)), 
+         x1 = my.th, y1 = my.lik, 
+         col = "#4b0306", lwd = 2)
+axis(2, at = c(0, .35), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, .3, .1), lwd = 0, lwd.ticks = 1, las = 1)
+
+# Posterior:
+my.post <- (1 / length(my.th)) * my.lik
+my.post <- my.post / sum(my.post)
+plot(my.th, my.post, pch = 21, cex = 1.5, lwd = 2, 
+     col = "#4b0306", bg = rgb(75/256, 3/256, 6/256, .2), 
+     ylim = c(0, .35), yaxt = "n", 
+     bty = "n", las = 1, yaxs = "i", # yaxs = "i", 
+     xlab = "", ylab = "", main = expression(bold("Posterior" %prop% "Prior x Likelihood")))
+segments(x0 = my.th, y0 = rep(0, length(my.th)), 
+         x1 = my.th, y1 = my.post, 
+         col = "#4b0306", lwd = 2)
+axis(2, at = c(0, .35), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, .3, .1), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+dev.off()
+```
