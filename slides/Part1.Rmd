@@ -168,7 +168,12 @@ Recall that we need three ingredients:
 - Model.
 
 # Bayes rule -- Example
-- *Data.* For now, let's only use the first 10 scores.
+*Data.* For now, let's only use the first 10 scores.
+
+- Sample size: 10
+- Number of men with $\text{PBF}>25\%$: 2
+- Sample proportion: $\widehat{\theta}=\frac{2}{10}=.20$
+
 \vfill
 
 ```{r, echo = FALSE}
@@ -177,13 +182,14 @@ kable(matrix(PBF[1:10], nrow = 1)) %>%
 ```
 
 # Bayes rule -- Example
-- *Model.* We'll use the binomial model. Assumptions:
-    - Independence between measurements.
-    - One population with underlying rate $\theta$.
-    - Random sample.
+*Model.* We'll use the binomial model. Assumptions:
+
+- Independence between measurements.
+- One population with underlying rate $\theta$.
+- Random sample.
 
 # Bayes rule -- Example
-- *Prior.* We'll try several.
+*Prior.* We'll try several.
 
 <!-- # Bayes rule -- Example -->
 <!-- - *Prior.* To start, let's (unrealistically) assume all PBF values are equally likely. -->
@@ -316,13 +322,60 @@ How do data typically affect posterior distributions?
 - For small sample sizes, posterior $\approx$ prior.
 - For large sample sizes, posterior $\approx$ likelihood.
 
+# Bayesian inference -- Some criticism
+I think I can hear some of you thinking right now\ldots
+\vfill
 
+> "Hey, but there are sooo many posterior distributions!"
 
+> "This seems all sooo subjective!"
 
+> "I sooo don't like it!"
 
+> :-(
 
+\vfill
+Fair points.
 
+Let me offer several counter-arguments.
 
+# Bayesian inference -- Counterarguments to criticism
+
+1. Posterior distributions are fairly stable across a wide range of reasonable priors, *for large data sets*.
+\vfill
+
+More data $\Rightarrow$ more information $\Rightarrow$ more certainty.
+
+# Bayesian inference -- Counterarguments to criticism
+```{r, child = 'include/posteriors_all.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/posteriors_all.png")
+```
+
+# Bayesian inference -- Counterarguments to criticism
+2. *Illusion of certainty:* Pretending that results tell us more than is actually possible.
+
+# Bayesian inference -- Counterarguments to criticism
+There is subjectivity in each step of the scientific way:
+
+- Selection of participants.
+- Number of assessments.
+- Variables to measure.
+- Variables to control.
+- Variability across researchers / labs.
+- Statistical model to use.
+- Variables to (not) include in the model.
+- \ldots
+\vfill
+
+It is *fair*, *logical*, *necessary*, that statistical inference reflects uncertainty.
+\vfill
+
+Do embrace uncertainty!
+
+(Andrew Gelman)
 
 
 

@@ -1,0 +1,115 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/posteriors_all.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(4, 6.5, 2.5, 5), bg = NA)
+layout(matrix(1:3, ncol = 1))
+
+### Priors
+a       <- 1
+b       <- 1
+curve(dbeta(x, a, b), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Priors", 
+      lwd = 2)
+
+a       <- 30
+b       <- 70
+curve(dbeta(x, a, b), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 2)
+
+a       <- 3
+b       <- 7
+curve(dbeta(x, a, b), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 3)
+
+a       <- 7
+b       <- 3
+curve(dbeta(x, a, b), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 4)
+
+axis(2, at = c(0, 17), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 15, 5), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+
+### Posteriors: N = 10
+PBF.use <- PBF[1:10]
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+
+a       <- 1
+b       <- 1
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Posteriors (N = 10)", 
+      lwd = 2)
+
+a       <- 30
+b       <- 70
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 2)
+
+a       <- 3
+b       <- 7
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 3)
+
+a       <- 7
+b       <- 3
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 4)
+
+axis(2, at = c(0, 17), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 15, 5), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+
+### Posteriors: N = 250
+PBF.use <- PBF
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+
+a       <- 1
+b       <- 1
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Posteriors (N = 250)", 
+      lwd = 2)
+
+a       <- 30
+b       <- 70
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 2)
+
+a       <- 3
+b       <- 7
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 3)
+
+a       <- 7
+b       <- 3
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", 
+      lwd = 2, add = TRUE, lty = 4)
+
+axis(2, at = c(0, 17), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 15, 5), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+dev.off()
+```
