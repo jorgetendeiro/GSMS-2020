@@ -1,0 +1,31 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/uncertainty4.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(4, 6.5, 2.5, 5), bg = NA)
+
+### Posterior: N = 250
+PBF.use <- PBF
+obese   <- sum(PBF.use == 1)
+N       <- length(PBF.use)
+
+a       <- 3
+b       <- 7
+curve(dbeta(x, a + obese, b + (N - obese)), yaxt = "n", ylim = c(0, 17), xlim = c(.15, .35), 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "Posterior (N = 250)", 
+      lwd = 2)
+HDI95 <- betaHPD(a + obese, b + (N - obese))
+polygon(x = c(seq(HDI95[1], HDI95[2], length.out = 100), seq(HDI95[2], HDI95[1], length.out = 100)), 
+        y = c(dbeta(c(seq(HDI95[1], HDI95[2], length.out = 100)), a + obese, b + (N - obese)), rep(0, 100)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+axis(2, at = c(0, 17), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = seq(0, 15, 5), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+
+text(.257, 6, expression(italic(paste("95% HDI:"))))
+text(.257, 4.5, expression(italic(paste("(.21, .31)"))))
+arrows(HDI95[1], 1, HDI95[2], 1, lwd = 2, length = .1, col = "#4b0306", code = 3)
+text(.257, 1.85, expression(italic(paste("(shortest interval)"))))
+dev.off()
+```

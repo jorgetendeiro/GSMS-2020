@@ -1,0 +1,21 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/around_40_prior.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(4, 6.5, 2.5, 5), bg = NA)
+
+a       <- 40
+b       <- 60
+
+# Prior:
+curve(dbeta(x, a, b), ylim = c(0, 8.5), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", lwd = 2)
+polygon(x = c(seq(0, 1, length.out = 100), seq(1, 0, length.out = 100)), 
+        y = c(dbeta(c(seq(0, 1, length.out = 100)), a, b), rep(0, 100)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+axis(2, at = c(0, 8.5), labels = c("", ""), lwd.ticks = 0)
+axis(2, at = c(0, 4, 8), lwd = 0, lwd.ticks = 1, las = 1)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+dev.off()
+```

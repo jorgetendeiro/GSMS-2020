@@ -30,6 +30,7 @@ nocite: |
 library(ggplot2)
 library(pander)
 library(kableExtra)
+library(pscl)
 panderOptions('round', 3)
 panderOptions('keep.trailing.zeros', TRUE)
 ```
@@ -375,15 +376,136 @@ It is *fair*, *logical*, *necessary*, that statistical inference reflects uncert
 
 Do embrace uncertainty!
 
-(Andrew Gelman)
+# Bayesian inference -- Counterarguments to criticism
+```{r, child = 'include/uncertainty.Rmd'}
+```
 
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/uncertainty.png")
+```
 
+# Bayesian inference -- Counterarguments to criticism
+3. Priors allow incorporating useful information.
 
+- What is known about the parameter?
+\vfill
 
+Let's not pretend we do not know anything.
 
+# Bayesian inference -- Counterarguments to criticism
+```{r, child = 'include/uniform_prior.Rmd'}
+```
 
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/uniform_prior.png")
+```
 
+# Bayesian inference -- Counterarguments to criticism
+About PBF:
 
+- It is actually known that the proportion of obese men in (some\ldots) population is [about 40%](https://en.wikipedia.org/wiki/Obesity_in_the_United_States). 
+- We can (we *should*!) take this into account.
+- And *that* is what the prior is for.
+\vfill
 
+(Do you know how much variability to expect?
+\linebreak
+Then include this in the prior too!!)
+\vfill
 
-# References
+One of Bayes' advantages: Accummulation of evidence.
+\linebreak 
+Use it!
+
+# Bayesian inference -- Counterarguments to criticism
+```{r, child = 'include/around_40_prior.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/around_40_prior.png")
+```
+
+# Bayesian inference -- Summarize results
+
+The posterior distribution is the *Holy Grail* in Bayesian statistics.
+
+It reflects our current knowledge of the world, conditional on:
+
+- The chosen model.
+- The chosen prior(s).
+- The observed data.
+\vfill
+
+How can we summarize the information in the posterior distribution?
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/uncertainty2.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/uncertainty2.png")
+```
+
+# Bayesian inference -- Summarize results
+
+*Point estimates.* 
+\linebreak
+Commonly used:
+
+- posterior mean
+- posterior mode
+- posterior median.
+\vfill
+
+For the PBF data based on 250 scores:
+\begin{center}
+post. mean $\approx$ post. mode $\approx$ post. median $\approx$ .26.
+\end{center}
+(Recall: $\widehat{\theta} = .256$.)
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/point_estimate.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/point_estimate.png")
+```
+
+# Bayesian inference -- Summarize results
+
+*Interval estimates.* 
+\linebreak
+I will focus on the 95% credible interval throughout.
+\vfill
+
+There are some variants (do not overly worry about these nuances):
+
+- *Central 95% credible interval.*
+\linebreak
+With 2.5% probability out on each tail.
+- *95% HDI (highest density interval).*
+\linebreak
+The shortest interval covering area .95.
+\vfill
+
+For the PBF data they practically coincide.
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/uncertainty3.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/uncertainty3.png")
+```
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/uncertainty4.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/uncertainty4.png")
+```
+
+# Bayesian inference -- Summarize results
+probs under the curve
+
