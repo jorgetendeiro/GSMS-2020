@@ -10,6 +10,7 @@ author: |
   | University of Groningen
   |   
   | \faEnvelopeO\  ```j.n.tendeiro@rug.nl```
+  | \faGlobe\ ```www.jorgetendeiro.com```
   | \faGithub\ ```https://github.com/jorgetendeiro/GSMS-2020```
 fontsize: 10pt
 output:
@@ -67,14 +68,17 @@ $$
 - *Prior*: Belief about the `true' value of $\theta$, *before looking at the data*.
 - *Likelihood*: The statistical model, linking $\theta$ to data.
 - *Posterior*: Updated knowledge about $\theta$, in light of the observed data.
+\vfill
 
-# Bayes rule
+Let's look at the Bayes rule from various angles.
+
+# Bayes rule -- ABC
 One useful way to think about the Bayes rule is by considering *Approximate Bayesian Computation* (ABC; see [Wiki](https://en.wikipedia.org/wiki/Approximate_Bayesian_computation)).
 
 - ABC is actually computationally *very* inefficient.
 - But, it is *conceptually* very clear!
 
-# Bayes rule
+# Bayes rule -- ABC
 ```{r, echo = FALSE, results = 'hide', eval = FALSE}
 png(filename = "include/figures/JrAFoq5fae-prior.png", 
      width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
@@ -104,7 +108,7 @@ dev.off()
 ```{r, child = 'include/prior_predictive_distribution.Rmd', out.width = '40%', fig.align = "center"}
 ```
 
-# Bayes rule
+# Bayes rule -- ABC
 The Bayes rule from the ABC perspective:
 
 > Find the values of $\theta$ that allow the model to predict data pretty much like our observed data.
@@ -112,10 +116,51 @@ The Bayes rule from the ABC perspective:
 \vfill
 Humm\ldots  
 
-MLE, anyone?
+Maximum likelihood estimation, anyone?
 \vfill
 
 Bayesian inference can be thought of as an extension of MLE!
+
+# Bayes rule -- Inverse probability
+Bayes rule allows reversing conditional probabilities.
+
+$$
+\fbox{$p(\mathcal{A}|\mathcal{B}) = \frac{p(\mathcal{A})p(\mathcal{B}|\mathcal{A})}{p(\mathcal{B})}$}
+$$
+
+
+Consider the canonical example:
+
+- $\mathcal{A}:$ Have disease.
+- $\mathcal{B}:$ Test positive.
+
+Then:
+
+- $p(\mathcal{B}|\mathcal{A}):$ Probability of testing positive given that one has the disease.
+\linebreak
+*Test's sensitivity.*
+- $p(\mathcal{A}|\mathcal{B}):$ Probability of having the disease given that (s)he tests positive.
+\linebreak
+*What patients really want to know.*
+
+# Bayes rule -- Updating beliefs
+
+Definition of probability:
+
+- *Frequentist:* Long-run relative frequency.
+\linebreak
+(Problem: $p(\text{Trump winning 2020 election})$?\ldots)
+
+- *Bayesian:* Degree of subjective belief.
+\vfill
+
+$$
+\fbox{$\text{posterior} \propto \text{prior} \times \text{likelihood}$}
+$$
+
+\vfill
+- Bayes rule is a rational means of updating our current belief (*prior*) by means of observed data (*likelihood*).
+- *“Today's posterior is tomorrow's prior”* -- Lindley (1970)
 
 # Bayes rule -- Summary
 $$
@@ -138,7 +183,7 @@ Data here: [https://dasl.datadescription.com/datafile/bodyfat/](https://dasl.dat
 - To keep it simple: I dichotomize the percentage of body fat (PBF).
 - 0 = PBF lower than 25%;  
 1 = PBF larger than 25%. 
-- *Goal*: Infer infer the proportion of obese men in the population.
+- *Goal*: Infer the proportion of obese men in the population.
 \vfill
 
 Let's denote the population proportion by $\theta$.
@@ -216,15 +261,15 @@ kable(matrix(PBF[1:10], nrow = 1)) %>%
 <!-- ``` -->
 
 # Bayes rule -- Example
+What happens if the prior is 'uninformative'?
+
+# Bayes rule -- Example
 ```{r, child = 'include/bayesrule_discrete_unif.Rmd'}
 ```
 
 ```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
 knitr::include_graphics("include/figures/bayesrule_discrete_unif.png")
 ```
-
-# Bayes rule -- Example
-What happens if the prior is 'uninformative'?
 
 # Bayes rule -- Example
 ```{r, child = 'include/bayesrule_beta_1_1.Rmd'}
@@ -369,6 +414,8 @@ There is subjectivity in each step of the scientific way:
 - Statistical model to use.
 - Variables to (not) include in the model.
 - \ldots
+
+Then, try topping it up with few and noisy data\ldots
 \vfill
 
 It is *fair*, *logical*, *necessary*, that statistical inference reflects uncertainty.
@@ -423,6 +470,25 @@ Use it!
 
 ```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
 knitr::include_graphics("include/figures/around_40_prior.png")
+```
+
+# Bayesian inference -- Counterarguments to criticism
+Of course, strange things can occur.
+\vfill
+
+> "A Bayesian is one who, vaguely expecting a horse, and catching a glimpse of a donkey, strongly believes he has seen a mule."
+\linebreak
+(Stephen Senn)
+
+\vfill
+(*Inspired by [Aki Vehtari](https://twitter.com/avehtari/status/1218896617346162688) and [John Kruschke](http://doingbayesiandataanalysis.blogspot.com/2011/07/horses-donkies-and-mules.html).*)
+
+# Bayesian inference -- Counterarguments to criticism
+```{r, child = 'include/horse_donkey_mule.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/horse_donkey_mule.png")
 ```
 
 # Bayesian inference -- Summarize results
@@ -507,5 +573,57 @@ knitr::include_graphics("include/figures/uncertainty4.png")
 ```
 
 # Bayesian inference -- Summarize results
-probs under the curve
+The posterior distribution allows computing probabilities for any events involving parameters.
+
+For instance:
+
+- What is the (posterior) probability that the population proportion of obese men is larger than 30%?
+
+- What is the (posterior) probability that the population proportion of obese men is between 20% and 30%?
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/post_probs_L30.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/post_probs_L30.png")
+```
+
+# Bayesian inference -- Summarize results
+```{r, child = 'include/post_probs_L20_U30.Rmd'}
+```
+
+```{r, echo = FALSE, out.width = '100%', fig.align = 'center'}
+knitr::include_graphics("include/figures/post_probs_L20_U30.png")
+```
+
+# Next
+
+Specific examples will be dealt with in Part 2.
+
+More concepts will be introduced as we proceed.
+\vfill
+
+Now where's that cup of coffee?
+
+```{r, echo = FALSE, out.width = '40%', fig.align = 'center'}
+knitr::include_graphics("include/figures/cup_coffee.jpg")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

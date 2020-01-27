@@ -1,0 +1,88 @@
+
+```{r echo = FALSE, results = 'hide', eval = FALSE}
+png(filename = "figures/horse_donkey_mule.png", 
+     width = 15, height = 10, units = "cm", pointsize = 10, res = 600)
+par(mar = c(3, .5, .5, 1), bg = NA, xpd = TRUE)
+layout(matrix(1:4, ncol = 2))
+
+### Plot 1:
+# prior
+curve(dnorm(x+5), from = -10, to = 10, ylim = c(0, .6), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", lwd = 2, lty = 2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+# likelihood
+curve(dnorm(x-5), from = -10, to = 10, 
+      n = 10001, col = "#4b0306", lwd = 2, lty = 3, add = TRUE)
+# posterior
+ar1 <- integrate(function(x) dnorm(x+5) * dnorm(x-5), -Inf, Inf)$value
+curve(dnorm(x+5) * dnorm(x-5) / ar1, from = -10, to = 10, 
+      n = 10001,  col = "#4b0306", lwd = 2, lty = 1, add = TRUE)
+polygon(x = c(seq(-10, 10, length.out = 1000), seq(10, -10, length.out = 1000)), 
+        y = c(sapply(seq(-10, 10, length.out = 1000), function(x) dnorm(x+5) * dnorm(x-5) / ar1), rep(0, 1000)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+text(-7.8, .2, expression(italic("Prior (N)")))
+text(0, .6, expression(bold(italic("Posterior"))), cex = 1.1)
+text(8.5, .3, expression(italic("Likelihood (N)")))
+
+### Plot 2:
+# prior
+curve(dt(x+5, 4), from = -10, to = 10, ylim = c(0, .4), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", lwd = 2, lty = 2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+# likelihood
+curve(dnorm(x-5), from = -10, to = 10, 
+      n = 10001, col = "#4b0306", lwd = 2, lty = 3, add = TRUE)
+# posterior
+ar2 <- integrate(function(x) dt(x+5, 4) * dnorm(x-5), -Inf, Inf)$value
+curve(dt(x+5, 4) * dnorm(x-5) / ar2, from = -10, to = 10, 
+      n = 10001,  col = "#4b0306", lwd = 2, lty = 1, add = TRUE)
+polygon(x = c(seq(-10, 10, length.out = 1000), seq(10, -10, length.out = 1000)), 
+        y = c(sapply(seq(-10, 10, length.out = 1000), function(x) dt(x+5, 4) * dnorm(x-5) / ar2), rep(0, 1000)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+text(-7.8, .2, expression(italic("Prior (t"[4]*")")))
+text(4.5, .075, expression(bold(italic("Posterior"))), cex = 1.1)
+text(8.5, .3, expression(italic("Likelihood (N)")))
+
+### Plot 3:
+# prior
+curve(dnorm(x+5), from = -10, to = 10, ylim = c(0, .4), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", lwd = 2, lty = 2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+# likelihood
+curve(dt(x-5, 4), from = -10, to = 10, 
+      n = 10001, col = "#4b0306", lwd = 2, lty = 3, add = TRUE)
+# posterior
+ar3 <- integrate(function(x) dnorm(x+5) * dt(x-5, 4), -Inf, Inf)$value
+curve(dnorm(x+5) * dt(x-5, 4) / ar3, from = -10, to = 10, 
+      n = 10001,  col = "#4b0306", lwd = 2, lty = 1, add = TRUE)
+polygon(x = c(seq(-10, 10, length.out = 1000), seq(10, -10, length.out = 1000)), 
+        y = c(sapply(seq(-10, 10, length.out = 1000), function(x) dnorm(x+5) * dt(x-5, 4) / ar2), rep(0, 1000)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+text(-7.8, .2, expression(italic("Prior (N)")))
+text(-4.5, .075, expression(bold(italic("Posterior"))), cex = 1.1)
+text(8.5, .3, expression(italic("Likelihood (t"[4]*")")))
+
+### Plot 4:
+# prior
+curve(dt(x+5, 4), from = -10, to = 10, ylim = c(0, .4), yaxt = "n", 
+      n = 10001, bty = "n", las = 1, col = "#4b0306", xaxs = "i", yaxs = "i", 
+      xlab = "", ylab = "", main = "", lwd = 2, lty = 2)
+mtext(expression(theta), side = 1, line = 3, cex = 1.2)
+# likelihood
+curve(dt(x-5, 4), from = -10, to = 10, 
+      n = 10001, col = "#4b0306", lwd = 2, lty = 3, add = TRUE)
+# posterior
+ar4 <- integrate(function(x) dt(x+5, 4) * dt(x-5, 4), -Inf, Inf)$value
+curve(dt(x+5, 4) * dt(x-5, 4) / ar4, from = -10, to = 10, 
+      n = 10001,  col = "#4b0306", lwd = 2, lty = 1, add = TRUE)
+polygon(x = c(seq(-10, 10, length.out = 1000), seq(10, -10, length.out = 1000)), 
+        y = c(sapply(seq(-10, 10, length.out = 1000), function(x) dt(x+5, 4) * dt(x-5, 4) / ar4), rep(0, 1000)), 
+        col = rgb(75/256, 3/256, 6/256, .2), border = NA)
+text(-7.8, .2, expression(italic("Prior (t"[4]*")")))
+text(0, .075, expression(bold(italic("Posterior"))), cex = 1.1)
+text(8.5, .3, expression(italic("Likelihood (t"[4]*")")))
+dev.off()
+```
