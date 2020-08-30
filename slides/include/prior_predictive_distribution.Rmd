@@ -53,7 +53,7 @@
 %Shape: Rectangle [id:dp5518599505408321] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (313,360) -- (349,360) -- (349,420) -- (313,420) -- cycle ;
 %Shape: Rectangle [id:dp7248366809971241] 
-\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=5.25]  (363,360) -- (399,360) -- (399,420) -- (363,420) -- cycle ;
+\draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (363,360) -- (399,360) -- (399,420) -- (363,420) -- cycle ;
 %Shape: Rectangle [id:dp4931493245792642] 
 \draw  [color={rgb, 255:red, 75; green, 3; blue, 6 }  ,draw opacity=1 ][line width=2.25]  (416,360) -- (452,360) -- (452,420) -- (416,420) -- cycle ;
 %Shape: Rectangle [id:dp8295226899742401] 
