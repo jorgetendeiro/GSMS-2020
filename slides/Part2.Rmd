@@ -453,7 +453,7 @@ I decided to leave them out.
 \end{center}
 \vfill
 
-# Plots per groups
+# Plots per group
 ```{r, echo = FALSE, fig.align = "center", out.width = "100%"}
 knitr::include_graphics("include/figures/example1_M4_post_groups.png")
 ```
